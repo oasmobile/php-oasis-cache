@@ -178,7 +178,7 @@ class Memcached extends \Memcached
 
         $key = $this->getNamespacedKey($key);
 
-        return parent::add($key, $value, $expiration, $udf_flags);
+        return parent::add($key, $value, $expiration);
     }
 
     public function addByKey($server_key, $key, $value, $expiration = 0, $udf_flags = 0)

@@ -58,6 +58,19 @@ class MemcachedTest extends BaseTestCase
         $this->assertEquals($val1, $testVal1, $testVal1);
     }
 
+    public function testAdd()
+    {
+
+        $key1 = 'k001';
+        $val1 = 'v001';
+
+        $this->cache->add($key1, $val1);
+
+        $testVal1 = $this->cache->get($key1);
+
+        $this->assertEquals($val1, $testVal1, $testVal1);
+    }
+
     public function testNamespaceWork()
     {
 
@@ -75,7 +88,7 @@ class MemcachedTest extends BaseTestCase
         );
     }
 
-    public function testMuti()
+    public function testGetSetMuti()
     {
 
         $items = [
@@ -88,6 +101,45 @@ class MemcachedTest extends BaseTestCase
         $getVals = $this->cache->getMulti(array_keys($items));
 
         $this->assertEquals(array_values($items), array_values($getVals), json_encode($getVals));
+    }
+
+    public function testDelMuti()
+    {
+
+        $items = [
+            'key1' => 'v01',
+            'key2' => 'v02',
+            'key3' => 'v03',
+        ];
+
+        $this->cache->setMulti($items);
+        $getVals = $this->cache->getMulti(array_keys($items));
+        $this->assertEquals(array_values($items), array_values($getVals), json_encode($getVals));
+
+        // delete items
+        $delRet = $this->cache->deleteMulti(array_keys($items));
+        $this->assertEquals(count($items), count($delRet));
+        foreach ($delRet as $k => $v) {
+            $this->assertEquals(true, $v);
+        }
+    }
+
+    public function testDelete()
+    {
+
+        $key1 = 'k001';
+        $val1 = 'v001';
+
+        $this->cache->add($key1, $val1);
+
+        $testVal1 = $this->cache->get($key1);
+        $this->assertEquals($val1, $testVal1, $testVal1);
+
+        $delRet = $this->cache->delete($key1);
+        $this->assertEquals(true,$delRet);
+
+        $getRet = $this->cache->get($key1);
+        $this->assertEquals(false, $getRet);
     }
 
 }
