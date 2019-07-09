@@ -15,7 +15,7 @@ class MemcachedTest extends BaseTestCase
     /**
      * @var Memcached
      */
-    private $cache     = null;
+    private $cache = null;
     /**
      * @var string
      */
@@ -73,6 +73,21 @@ class MemcachedTest extends BaseTestCase
             $keys,
             json_encode($keys)
         );
+    }
+
+    public function testMuti()
+    {
+
+        $items = [
+            'key1' => 'v01',
+            'key2' => 'v02',
+            'key3' => 'v03',
+        ];
+
+        $this->cache->setMulti($items);
+        $getVals = $this->cache->getMulti(array_keys($items));
+
+        $this->assertEquals(array_values($items), array_values($getVals), json_encode($getVals));
     }
 
 }

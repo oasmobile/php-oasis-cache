@@ -1,11 +1,11 @@
 {
     "name"             : "oasis/cache",
-    "description"      : "Provider cache component",
+    "description"      : "Provide optimized cache component",
     "type"             : "library",
     "minimum-stability": "stable",
     "license"          : "MIT",
     "require"          : {
-        "php"          : ">=7.0.0",
+        "php"          : ">=7.1",
         "oasis/logging": "^1.5",
         "ext-memcached": "*"
     },
