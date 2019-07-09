@@ -110,7 +110,7 @@ class Memcached extends \Memcached
 
         $key = $this->getNamespacedKey($key);
 
-        return parent::setByKey($server_key, $key, $value, $expiration, $udf_flags);
+        return parent::setByKey($server_key, $key, $value, $expiration);
     }
 
     public function touch($key, $expiration = 0)
@@ -154,7 +154,7 @@ class Memcached extends \Memcached
 
         $items = $this->prefixArrayKeys($items);
 
-        return parent::setMultiByKey($server_key, $items, $expiration, $udf_flags);
+        return parent::setMultiByKey($server_key, $items, $expiration);
     }
 
     public function cas($cas_token, $key, $value, $expiration = 0, $udf_flags = 0)
@@ -162,7 +162,7 @@ class Memcached extends \Memcached
 
         $key = $this->getNamespacedKey($key);
 
-        return parent::cas($cas_token, $key, $value, $expiration, $udf_flags);
+        return parent::cas($cas_token, $key, $value, $expiration);
     }
 
     public function casByKey($cas_token, $server_key, $key, $value, $expiration = 0, $udf_flags = 0)
@@ -186,7 +186,7 @@ class Memcached extends \Memcached
 
         $key = $this->getNamespacedKey($key);
 
-        return parent::addByKey($server_key, $key, $value, $expiration, $udf_flags);
+        return parent::addByKey($server_key, $key, $value, $expiration);
     }
 
     public function append($key, $value, $expiration = NULL)
@@ -194,7 +194,7 @@ class Memcached extends \Memcached
 
         $key = $this->getNamespacedKey($key);
 
-        return parent::append($key, $value, $expiration);
+        return parent::append($key, $value);
     }
 
     public function appendByKey($server_key, $key, $value, $expiration = null)
@@ -210,7 +210,7 @@ class Memcached extends \Memcached
 
         $key = $this->getNamespacedKey($key);
 
-        return parent::prepend($key, $value, $expiration);
+        return parent::prepend($key, $value);
     }
 
     public function prependByKey($server_key, $key, $value, $expiration = NULL)
@@ -226,7 +226,7 @@ class Memcached extends \Memcached
 
         $key = $this->getNamespacedKey($key);
 
-        return parent::replace($key, $value, $expiration, $udf_flags);
+        return parent::replace($key, $value, $expiration);
     }
 
     public function replaceByKey($server_key, $key, $value, $expiration = null, $udf_flags = 0)
@@ -234,7 +234,7 @@ class Memcached extends \Memcached
 
         $key = $this->getNamespacedKey($key);
 
-        return parent::replaceByKey($server_key, $key, $value, $expiration, $udf_flags);
+        return parent::replaceByKey($server_key, $key, $value, $expiration);
     }
 
     public function delete($key, $time = 0)

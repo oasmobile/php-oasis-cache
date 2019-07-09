@@ -8,6 +8,10 @@ use Oasis\Cache\UnitTest\BaseTestCase;
 /**
  * Class MemcachedTest
  * @package Oasis\Cache\UnitTest\Memcache
+ *
+ *  Below cases cover all cache usage in \Doctrine\Common\Cache\MemcachedCache
+ *  but do cover all cache usage in \Doctrine\Common\Cache\MemcachedCache
+ *
  */
 class MemcachedTest extends BaseTestCase
 {
@@ -136,10 +140,40 @@ class MemcachedTest extends BaseTestCase
         $this->assertEquals($val1, $testVal1, $testVal1);
 
         $delRet = $this->cache->delete($key1);
-        $this->assertEquals(true,$delRet);
+        $this->assertEquals(true, $delRet);
 
         $getRet = $this->cache->get($key1);
         $this->assertEquals(false, $getRet);
+    }
+
+    public function testOthersSimply()
+    {
+
+        $cas_token = 'cas_token-001';
+        $serverKey = 'server-key-01';
+        $key       = 'key-1';
+        $val       = 'val-1';
+        $keys      = ['key1', 'key2'];
+        $items     = [
+            'key1' => 'v01',
+            'key2' => 'v02',
+            'key3' => 'v03',
+        ];
+
+        $this->cache->getByKey($serverKey, $key);
+        $this->cache->getMultiByKey($serverKey, $keys);
+        $this->cache->getDelayed($keys);
+        $this->cache->getDelayedByKey($serverKey, $keys);
+        $this->cache->setByKey($serverKey, $key, $val);
+        $this->cache->touch($key);
+        $this->cache->touchByKey($serverKey, $key, time());
+        $this->cache->setMultiByKey($serverKey, $items);
+//        $this->cache->cas($cas_token, $key, $val);
+        $this->cache->addByKey($serverKey, $key, $val);
+        $this->cache->replace($key,$val);
+        $this->cache->replaceByKey($serverKey,$key,$val);
+        $this->cache->deleteByKey($serverKey,$key);
+        $this->cache->deleteMultiByKey($serverKey,$keys);
     }
 
 }
