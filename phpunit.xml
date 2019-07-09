@@ -7,8 +7,8 @@
         backupStaticAttributes="false"
 >
     <testsuites>
-        <testsuite name="auto-renew-token">
-            <file>ut/AutoTokenRenewalMiddlewareTest.php</file>
+        <testsuite name="memcache">
+            <file>ut/Memcache/MemcachedTest.php</file>
         </testsuite>
     </testsuites>
 </phpunit>
