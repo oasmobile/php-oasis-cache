@@ -46,7 +46,6 @@ class MemcachedTest extends BaseTestCase
             $this->sdkConfig['memcached']['port']
         );
         $this->cache->setNamespace($this->namespace);
-        $this->cache->setNamespaceConnector('-');
 
         return $this->cache;
     }
@@ -88,7 +87,7 @@ class MemcachedTest extends BaseTestCase
         $keys = $this->cache->getAllKeys();
 
         $this->assertContains(
-            sprintf('%s%s%s', $this->namespace, $this->cache->getNamespaceConnector(), $key1),
+            sprintf('%s:%s', $this->namespace, $key1),
             $keys,
             json_encode($keys)
         );
