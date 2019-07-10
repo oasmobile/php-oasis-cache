@@ -20,7 +20,26 @@ class Memcached extends \Memcached
     /**
      * @var string
      */
-    private $namespace = '';
+    private $namespace          = '';
+    private $namespaceConnector = ':';
+
+    /**
+     * @return string
+     */
+    public function getNamespaceConnector(): string
+    {
+
+        return $this->namespaceConnector;
+    }
+
+    /**
+     * @param string $namespaceConnector
+     */
+    public function setNamespaceConnector(string $namespaceConnector): void
+    {
+
+        $this->namespaceConnector = $namespaceConnector;
+    }
 
     public function getNamespace()
     {
@@ -45,7 +64,7 @@ class Memcached extends \Memcached
     private function getNamespacedKey($key)
     {
 
-        return sprintf('%s:%s', $this->namespace, $key);
+        return sprintf('%s%s%s', $this->namespace, $this->namespaceConnector, $key);
     }
 
     public function get(
