@@ -1,0 +1,32 @@
+{
+    "name"             : "oasis/cache",
+    "description"      : "Provide optimized cache component",
+    "type"             : "library",
+    "minimum-stability": "stable",
+    "license"          : "MIT",
+    "require"          : {
+        "php"          : ">=7.1",
+        "ext-memcached": "*"
+    },
+    "require-dev"      : {
+        "oasis/logging"  : "^1.5",
+        "phpunit/phpunit": "^5.6",
+        "ext-json"       : "*"
+    },
+    "autoload"         : {
+        "psr-4": {
+            "Oasis\\Cache\\": "src/"
+        }
+    },
+    "autoload-dev"     : {
+        "psr-4": {
+            "Oasis\\Cache\\UnitTest\\": "ut/"
+        }
+    },
+    "authors"          : [
+        {
+            "name" : "Xuchang Zhang",
+            "email": "zhang.xuchang@qq.com"
+        }
+    ]
+}
