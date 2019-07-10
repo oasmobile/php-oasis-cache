@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Created by PhpStorm.
  * User: xuchang
@@ -32,6 +33,7 @@ class Memcached extends \Memcached
         $this->namespace = (string)$namespace;
     }
 
+    /** @noinspection PhpSignatureMismatchDuringInheritanceInspection */
     public function set($key, $value, $expiration = 0)
     {
 
@@ -46,7 +48,9 @@ class Memcached extends \Memcached
         return sprintf('%s:%s', $this->namespace, $key);
     }
 
-    public function get($key, $cache_cb = null, $get_flags = null)
+    public function get(
+        $key, /** @noinspection PhpSignatureMismatchDuringInheritanceInspection */ $cache_cb = null, $get_flags = null
+    )
     {
 
         $key = $this->getNamespacedKey($key);
@@ -54,7 +58,10 @@ class Memcached extends \Memcached
         return parent::get($key, $cache_cb, $get_flags);
     }
 
-    public function getByKey($server_key, $key, $cache_cb = null, $get_flags = null)
+    public function getByKey(
+        $server_key, $key, /** @noinspection PhpSignatureMismatchDuringInheritanceInspection */
+        $cache_cb = null, $get_flags = null
+    )
     {
 
         $key = $this->getNamespacedKey($key);
@@ -89,7 +96,10 @@ class Memcached extends \Memcached
         return parent::getMultiByKey($server_key, $keys, $get_flags);
     }
 
-    public function getDelayed(array $keys, $with_cas = null, $value_cb = null)
+    public function getDelayed(
+        array $keys, $with_cas = null,
+        /** @noinspection PhpSignatureMismatchDuringInheritanceInspection */ $value_cb = null
+    )
     {
 
         $keys = $this->prefixKeys($keys);
@@ -97,7 +107,10 @@ class Memcached extends \Memcached
         return parent::getDelayed($keys, $with_cas, $value_cb);
     }
 
-    public function getDelayedByKey($server_key, array $keys, $with_cas = null, $value_cb = null)
+    public function getDelayedByKey(
+        $server_key, array $keys, $with_cas = null,
+        /** @noinspection PhpSignatureMismatchDuringInheritanceInspection */ $value_cb = null
+    )
     {
 
         $keys = $this->prefixKeys($keys);
@@ -133,7 +146,6 @@ class Memcached extends \Memcached
     {
 
         $items = $this->prefixArrayKeys($items);
-
 
         return parent::setMulti($items, $expiration);
     }
@@ -189,7 +201,7 @@ class Memcached extends \Memcached
         return parent::addByKey($server_key, $key, $value, $expiration);
     }
 
-    public function append($key, $value, $expiration = NULL)
+    public function append($key, $value, $expiration = null)
     {
 
         $key = $this->getNamespacedKey($key);
@@ -202,10 +214,10 @@ class Memcached extends \Memcached
 
         $key = $this->getNamespacedKey($key);
 
-        return parent::appendByKey($server_key, $key, $value, $expiration);
+        return parent::appendByKey($server_key, $key, $value);
     }
 
-    public function prepend($key, $value, $expiration = NULL)
+    public function prepend($key, $value, $expiration = null)
     {
 
         $key = $this->getNamespacedKey($key);
@@ -213,12 +225,12 @@ class Memcached extends \Memcached
         return parent::prepend($key, $value);
     }
 
-    public function prependByKey($server_key, $key, $value, $expiration = NULL)
+    public function prependByKey($server_key, $key, $value, $expiration = null)
     {
 
         $key = $this->getNamespacedKey($key);
 
-        return parent::prependByKey($server_key, $key, $value, $expiration);
+        return parent::prependByKey($server_key, $key, $value);
     }
 
     public function replace($key, $value, $expiration = null, $udf_flags = 0)
@@ -245,7 +257,8 @@ class Memcached extends \Memcached
         return parent::delete($key, $time);
     }
 
-    public function deleteMulti($keys, $time = NULL)
+    public function deleteMulti(/** @noinspection PhpSignatureMismatchDuringInheritanceInspection */ $keys, $time = null
+    )
     {
 
         $keys = $this->prefixKeys($keys);
@@ -261,7 +274,10 @@ class Memcached extends \Memcached
         return parent::deleteByKey($server_key, $key, $time);
     }
 
-    public function deleteMultiByKey($server_key, $keys, $time = null)
+    public function deleteMultiByKey(
+        $server_key, /** @noinspection PhpSignatureMismatchDuringInheritanceInspection */
+        $keys, $time = null
+    )
     {
 
         $keys = $this->prefixKeys($keys);

@@ -146,10 +146,9 @@ class MemcachedTest extends BaseTestCase
         $this->assertEquals(false, $getRet);
     }
 
-    public function testOthersSimply()
+    public function testAllOtherMethodsSimply()
     {
 
-        $cas_token = 'cas_token-001';
         $serverKey = 'server-key-01';
         $key       = 'key-1';
         $val       = 'val-1';
@@ -168,12 +167,34 @@ class MemcachedTest extends BaseTestCase
         $this->cache->touch($key);
         $this->cache->touchByKey($serverKey, $key, time());
         $this->cache->setMultiByKey($serverKey, $items);
-//        $this->cache->cas($cas_token, $key, $val);
         $this->cache->addByKey($serverKey, $key, $val);
-        $this->cache->replace($key,$val);
-        $this->cache->replaceByKey($serverKey,$key,$val);
-        $this->cache->deleteByKey($serverKey,$key);
-        $this->cache->deleteMultiByKey($serverKey,$keys);
+        $this->cache->replace($key, $val);
+        $this->cache->replaceByKey($serverKey, $key, $val);
+        $this->cache->deleteByKey($serverKey, $key);
+        $this->cache->deleteMultiByKey($serverKey, $keys);
+
+        //
+        $cas_token = 1;
+        $this->cache->get($key, null, $cas_token);
+        $this->cache->cas($cas_token, $key, $val);
+        $this->cache->casByKey($cas_token, $serverKey, $key, $val);
+        //
+        $this->cache->setOption(Memcached::OPT_COMPRESSION, false);
+        $this->cache->set($key, $val);
+        $this->cache->append($key, '(2)');
+        $this->cache->appendByKey($serverKey, $key, '(2)');
+        $this->cache->prepend($key, '<1>');
+        $this->cache->prependByKey($serverKey, $key, '<1>');
+
+        $this->cache->setOption(Memcached::OPT_COMPRESSION, true);
+
+        //
+        $this->cache->setOption(Memcached::OPT_BINARY_PROTOCOL, true);
+        $this->cache->set($key, 1);
+        $this->cache->increment($key, 10);
+        $this->cache->incrementByKey($serverKey, $key, 10);
+        $this->cache->decrement($key, 1);
+        $this->cache->decrementByKey($serverKey, $key, 1);
     }
 
 }
