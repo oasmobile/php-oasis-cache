@@ -10,8 +10,11 @@
 namespace Oasis\Cache;
 
 /**
- * Class DCMemecached
- * @package Oasis\DeployCenter\Database
+ * Class Memcached
+ * @package Oasis\Cache
+ *
+ * - Test well under libmemcached version => 1.0.18
+ *
  */
 class Memcached extends \Memcached
 {

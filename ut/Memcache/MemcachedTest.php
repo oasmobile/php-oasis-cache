@@ -11,6 +11,8 @@ use Oasis\Cache\UnitTest\BaseTestCase;
  *
  * Below cases well cover all referenced cache methods in \Doctrine\Common\Cache\MemcachedCache
  *
+ * and all have passed under libmemcached version => 1.0.18
+ *
  */
 class MemcachedTest extends BaseTestCase
 {
