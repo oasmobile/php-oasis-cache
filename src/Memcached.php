@@ -33,8 +33,7 @@ class Memcached extends \Memcached
         $this->namespace = (string)$namespace;
     }
 
-    /** @noinspection PhpSignatureMismatchDuringInheritanceInspection */
-    public function set($key, $value, $expiration = 0)
+    public function set($key, $value, $expiration = 0, $udf_flags = 0)
     {
 
         $key = $this->getNamespacedKey($key);
@@ -49,7 +48,7 @@ class Memcached extends \Memcached
     }
 
     public function get(
-        $key, /** @noinspection PhpSignatureMismatchDuringInheritanceInspection */ $cache_cb = null, $get_flags = null
+        $key, /** @noinspection PhpSignatureMismatchDuringInheritanceInspection */ $cache_cb = null, $get_flags = 0
     )
     {
 
