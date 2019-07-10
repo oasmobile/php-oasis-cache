@@ -9,8 +9,7 @@ use Oasis\Cache\UnitTest\BaseTestCase;
  * Class MemcachedTest
  * @package Oasis\Cache\UnitTest\Memcache
  *
- *  Below cases cover all cache usage in \Doctrine\Common\Cache\MemcachedCache
- *  but do cover all cache usage in \Doctrine\Common\Cache\MemcachedCache
+ * Below cases well cover all referenced cache methods in \Doctrine\Common\Cache\MemcachedCache
  *
  */
 class MemcachedTest extends BaseTestCase
